@@ -1,14 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using deVoid.UIFramework;
 using deVoid.Utils;
-using UnityEngine;
 
-public class ViewAllUsersSignal : ASignal{}
-public class StartWindowController : AWindowController
+namespace _Scripts.ScreenControllers
 {
-    public void UI_StartBtnViewAll()
+    public class ViewAllUsersSignal : ASignal{}
+    public class StartWindowController : AWindowController
     {
-        Signals.Get<ViewAllUsersSignal>().Dispatch();
+        public void UI_StartBtnViewAll()
+        {
+            Signals.Get<ViewAllUsersSignal>().Dispatch();
+        }
     }
 }
