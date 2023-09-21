@@ -15,13 +15,13 @@ public class UIController : MonoBehaviour
     private void Awake()
     {
         _uiFrame = _defaultUISettings.CreateUIInstance();
-        Signals.Get<ViewAllUsersSignal>().AddListener(OnViewAllUsers);
+        //Signals.Get<ViewAllUsersSignal>().AddListener(OnViewAllUsers);
         Signals.Get<NavigateToPreviousScreenSignal>().AddListener(OnPreviousWindow);
     }
 
     private void Start()
     {
-        _uiFrame.OpenWindow(ScreenIDs.StartWindow);
+        _uiFrame.OpenWindow(ScreenIDs.AllUsersWindow);
     }
 
     private void OnViewAllUsers()

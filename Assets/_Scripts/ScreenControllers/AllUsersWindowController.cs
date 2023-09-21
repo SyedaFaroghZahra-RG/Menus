@@ -1,38 +1,42 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using _Scripts.APICalls;
 using deVoid.UIFramework;
 using deVoid.Utils;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Networking;
+using UnityEngine.UI;
 
 namespace _Scripts.ScreenControllers
 {
+    
     public class AllUsersWindowController : AWindowController
     {
-        
-        //[SerializeField] private GameObject _User;
-        [SerializeField] private TextMeshProUGUI _userName;
-
-        protected override void AddListeners()
+        public UnityWebRequest.Result result;
+        [SerializeField] private GameObject _parent;
+        [SerializeField] private GameObject _User;
+        private UserData u;
+        private string _userName;
+       
+        protected override void Awake()
         {
-            base.AddListeners();
-            Signals.Get<ViewAllUsersSignal>().AddListener(SetData);
+            base.Awake();
+            SetData();
         }
 
-        protected override void RemoveListeners()
-        {
-            base.RemoveListeners();
-            Signals.Get<ViewAllUsersSignal>().RemoveListener(SetData);
-        }
-        
         private void SetData()
-        {
-            _userName.text  = GetUserData.GetNewUser();
-            /*for (int i = 0; i < 15; i++)
+        { 
+            u = GetUserData.GetNewUser();
+
+            for (int i = 0; i < 30; i++)
             {
-                var u = Instantiate(_User);
-                u.GetComponentInChildren<TextMeshProUGUI>().text = user.username;
-            }*/
+                _userName = u.users[i].username;
+                var user = Instantiate(_User, _parent.transform);
+                user.GetComponentInChildren<TextMeshProUGUI>().text = _userName;
+                
+            }
         }
     }
 }
