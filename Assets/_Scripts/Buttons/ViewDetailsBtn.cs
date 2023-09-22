@@ -24,8 +24,8 @@ public class ViewDetailsBtn : MonoBehaviour
     }
     private UserDetailsProperty GetClickedUser()
     {
-        User user = GetComponentInParent<UserForPrefab>().user;
-        Sprite userImage = GetComponentInParent<UserForPrefab>()._ProfilePic;
+        User user = GetComponentInParent<UserDataController>().user;
+        Sprite userImage = GetComponentInParent<UserDataController>()._ProfilePic;
         UserDetailsProperty UserProps = new UserDetailsProperty(user, userImage);
         return UserProps;
     }

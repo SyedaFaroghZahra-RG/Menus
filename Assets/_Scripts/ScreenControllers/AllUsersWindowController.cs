@@ -45,8 +45,8 @@ namespace _Scripts.ScreenControllers
 
         private void StoreUserData(User u, Sprite userImage, GameObject user)
         {
-            user.GetComponent<UserForPrefab>().user = u;
-            user.GetComponent<UserForPrefab>()._ProfilePic = userImage;
+            user.GetComponent<UserDataController>().user = u;
+            user.GetComponent<UserDataController>()._ProfilePic = userImage;
         }
         private async Task GetTexture(string uri) {
           using UnityWebRequest www = UnityWebRequestTexture.GetTexture(uri);

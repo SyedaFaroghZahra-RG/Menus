@@ -714,6 +714,12 @@ MonoBehaviour:
     isPopup: 0
   _userNameTitle: {fileID: 2608285844918285735}
   _userImage: {fileID: 2608285844838782037}
+  _firstName: {fileID: 4361213793231401047}
+  _lastName: {fileID: 6041443766891243522}
+  _height: {fileID: 3946637883527905580}
+  _weight: {fileID: 3992719195252520798}
+  _eyecolor: {fileID: 344514818850333441}
+  _bloodgroup: {fileID: 2234854346926805642}
 --- !u!1 &2608285845236300652
 GameObject:
   m_ObjectHideFlags: 0
@@ -987,7 +993,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 547, y: 0}
+  m_AnchoredPosition: {x: 209, y: 0}
   m_SizeDelta: {x: 223.898, y: 466.637}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &255932692020093622
@@ -2050,7 +2056,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -595, y: 0}
+  m_AnchoredPosition: {x: -241, y: 0}
   m_SizeDelta: {x: 223.89795, y: 466.637}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3195721114018898784
