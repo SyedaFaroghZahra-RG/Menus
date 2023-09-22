@@ -703,5 +703,6 @@ MonoBehaviour:
     hideOnForegroundLost: 1
     windowQueuePriority: 0
     isPopup: 0
+  result: 0
   _parent: {fileID: 3529168394590392191}
   _User: {fileID: 7738941478297816567, guid: a1fd45f308132384684c7b4d6fd1e98f, type: 3}

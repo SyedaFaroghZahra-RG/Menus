@@ -15,7 +15,7 @@ public class UIController : MonoBehaviour
     private void Awake()
     {
         _uiFrame = _defaultUISettings.CreateUIInstance();
-        //Signals.Get<ViewAllUsersSignal>().AddListener(OnViewAllUsers);
+        Signals.Get<ViewUserDetailsSignal>().AddListener(ViewUserDetails);
         Signals.Get<NavigateToPreviousScreenSignal>().AddListener(OnPreviousWindow);
     }
 
@@ -24,9 +24,9 @@ public class UIController : MonoBehaviour
         _uiFrame.OpenWindow(ScreenIDs.AllUsersWindow);
     }
 
-    private void OnViewAllUsers()
+    private void ViewUserDetails(UserDetailsProperty userPayLoad)
     {
-        _uiFrame.OpenWindow(ScreenIDs.AllUsersWindow);
+        _uiFrame.OpenWindow(ScreenIDs.UserDetailsWindow, userPayLoad);
         _uiFrame.ShowPanel(ScreenIDs.BackBtnNavigation);
     }
     private void OnPreviousWindow()
