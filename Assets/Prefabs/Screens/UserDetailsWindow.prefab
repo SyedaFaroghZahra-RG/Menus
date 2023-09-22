@@ -712,6 +712,8 @@ MonoBehaviour:
     hideOnForegroundLost: 1
     windowQueuePriority: 0
     isPopup: 0
+  _userNameTitle: {fileID: 2608285844918285735}
+  _userImage: {fileID: 2608285844838782037}
 --- !u!1 &2608285845236300652
 GameObject:
   m_ObjectHideFlags: 0

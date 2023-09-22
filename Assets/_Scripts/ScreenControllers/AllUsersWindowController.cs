@@ -28,54 +28,43 @@ namespace _Scripts.ScreenControllers
             SetData();
         }
         
-        private async void SetData()
+        private async void  SetData()
         { 
             u = GetUserData.GetNewUser();
-
-            for (int i = 0; i < 30; i++)
+            foreach (var t in u.users)
             {
-                _userName = u.users[i].username;
-                _imageUri = u.users[i].image;
+                _userName = t.username;
+                _imageUri = t.image;
                 var user = Instantiate(_User, _parent.transform);
                 user.GetComponentInChildren<TextMeshProUGUI>().text = _userName;
-                await GetTexture(_imageUri);
+                await GetTexture(_imageUri); 
                 user.GetComponentInChildren<Image>().sprite = _userImage;
-                user.GetComponentInChildren<Button>().name = u.users[i].id.ToString();
+                StoreUserData(t, _userImage, user);
             }
         }
-        private async Task GetTexture(string uri)
-        {
-            using UnityWebRequest www = UnityWebRequestTexture.GetTexture(uri);
-            var operation =  www.SendWebRequest();
 
-            while (!operation.isDone)
-                await Task.Yield();
+        private void StoreUserData(User u, Sprite userImage, GameObject user)
+        {
+            user.GetComponent<UserForPrefab>().user = u;
+            user.GetComponent<UserForPrefab>()._ProfilePic = userImage;
+        }
+        private async Task GetTexture(string uri) {
+          using UnityWebRequest www = UnityWebRequestTexture.GetTexture(uri);
+          var operation =  www.SendWebRequest();
+
+          while (!operation.isDone)
+              await Task.Yield();
             
-            if (www.result != UnityWebRequest.Result.Success)
-            {
-                Debug.Log(www.error);
-            }
-            else
-            {
-                Texture2D myTexture = ((DownloadHandlerTexture)www.downloadHandler).texture;
-                _userImage = Sprite.Create(myTexture, new Rect(0, 0, myTexture.width, myTexture.height),
-                    new Vector2(0.5f, 0.5f));
-            }
-        }
-
-        public void UI_ViewDetails()
-        {
-            Signals.Get<ViewUserDetailsSignal>().Dispatch(GetClickedUser());
-        }
-
-        private UserDetailsProperty GetClickedUser()
-        {
-            int id = int.Parse(EventSystem.current.currentSelectedGameObject.name);
-           
-            Debug.Log(id);
-            User ClickedUser = u.users[id];
-            UserDetailsProperty UserProps = new UserDetailsProperty(ClickedUser);
-            return UserProps;
+          if (www.result != UnityWebRequest.Result.Success)
+          {
+              Debug.Log(www.error);
+          }
+          else
+          {
+              Texture2D myTexture = ((DownloadHandlerTexture)www.downloadHandler).texture;
+              _userImage = Sprite.Create(myTexture, new Rect(0, 0, myTexture.width, myTexture.height),
+                  new Vector2(0.5f, 0.5f));
+          }
         }
     }
 }
