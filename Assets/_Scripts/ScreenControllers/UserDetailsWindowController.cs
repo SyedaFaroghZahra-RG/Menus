@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using deVoid.UIFramework;
 using deVoid.Utils;
 using TMPro;
@@ -17,6 +15,7 @@ public class UserDetailsProperty : WindowProperties
     public UserDetailsProperty(User user, Sprite _userImage)
     {
         _user = user;
+        this._userImage = _userImage;
     }
 }
 public class UserDetailsWindowController : AWindowController<UserDetailsProperty>

@@ -42,12 +42,7 @@ namespace _Scripts.ScreenControllers
                 StoreUserData(t, _userImage, user);
             }
         }
-
-        private void StoreUserData(User u, Sprite userImage, GameObject user)
-        {
-            user.GetComponent<UserDataController>().user = u;
-            user.GetComponent<UserDataController>()._ProfilePic = userImage;
-        }
+        
         private async Task GetTexture(string uri) {
           using UnityWebRequest www = UnityWebRequestTexture.GetTexture(uri);
           var operation =  www.SendWebRequest();
@@ -65,6 +60,11 @@ namespace _Scripts.ScreenControllers
               _userImage = Sprite.Create(myTexture, new Rect(0, 0, myTexture.width, myTexture.height),
                   new Vector2(0.5f, 0.5f));
           }
+        }
+        private void StoreUserData(User u, Sprite userImage, GameObject user)
+        {
+            user.GetComponent<UserDataController>().user = u;
+            user.GetComponent<UserDataController>()._ProfilePic = userImage;
         }
     }
 }
