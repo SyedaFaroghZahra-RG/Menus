@@ -25,17 +25,17 @@ namespace _Scripts.ScreenControllers
         protected override void Awake()
         {
             base.Awake();
+            u = ServiceLocator.ServiceLocator.Instance.GetIGameService().GetUserData();
             SetData();
         }
         
         private async void  SetData()
-        { 
-            u = GetUserData.GetNewUser();
+        {
             foreach (var t in u.users)
             {
                 _userName = t.username;
                 _imageUri = t.image;
-                var user = Instantiate(_User, _parent.transform);
+                var user = Instantiate(_User, _parent.transform) ;
                 user.GetComponentInChildren<TextMeshProUGUI>().text = _userName;
                 await GetTexture(_imageUri); 
                 user.GetComponentInChildren<Image>().sprite = _userImage;

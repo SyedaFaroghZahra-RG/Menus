@@ -1,13 +1,12 @@
-using System.IO;
+﻿using System.IO;
 using System.Net;
 using _Scripts.StaticData;
 using UnityEngine;
-
 namespace _Scripts.APICalls
 {
-    public static class GetUserData
+    public class HandleUserDataService : IGameService
     {
-        public static UserData GetNewUser()
+        public UserData GetUserData()
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(StaticDataAPIs.UserDataAPI);
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
