@@ -25,8 +25,7 @@ public class ViewDetailsBtn : MonoBehaviour
     private UserDetailsProperty GetClickedUser()
     {
         int uid = GetComponentInParent<UserDataController>().UserID;
-        User user = GetComponentInParent<UserDataController>().user;
-       // Sprite userImage = GetComponentInParent<UserDataController>().isprite;
+        User user = ServiceLocator.Instance.GetService<IUserService>().AccessUserData(uid);
         Sprite userImage = ServiceLocator.Instance.GetService<IImageService>().GetImage(uid);
         UserDetailsProperty UserProps = new UserDetailsProperty(user, userImage);
         return UserProps;

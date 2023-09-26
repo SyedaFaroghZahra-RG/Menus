@@ -11,9 +11,9 @@ using UnityEngine.UI;
 
 public class UserDataController : MonoBehaviour
 {
+    private User user;
     [SerializeField] private TextMeshProUGUI _userName;
     [SerializeField] private Image _ProfilePic;
-    public User user { get; private set; }
     public int UserID { get; private set; }
 
     public async void SetUserData(User u)
@@ -22,6 +22,8 @@ public class UserDataController : MonoBehaviour
          UserID = u.id;
         _userName.text = user.username;
         _ProfilePic.sprite =  await GetTexture(u.image);
+        
+        ServiceLocator.Instance.GetService<IUserService>().SetUserData(user, UserID);
         ServiceLocator.Instance.GetService<IImageService>().SetImage(_ProfilePic.sprite, UserID);
     }
     
