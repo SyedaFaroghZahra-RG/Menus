@@ -25,7 +25,7 @@ public class ViewDetailsBtn : MonoBehaviour
     private UserDetailsProperty GetClickedUser()
     {
         User user = GetComponentInParent<UserDataController>().user;
-        Sprite userImage = GetComponentInParent<UserDataController>()._ProfilePic;
+        Sprite userImage = GetComponentInParent<UserDataController>().isprite;
         UserDetailsProperty UserProps = new UserDetailsProperty(user, userImage);
         return UserProps;
     }

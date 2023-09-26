@@ -18,10 +18,7 @@ namespace _Scripts.ScreenControllers
         [SerializeField] private GameObject _parent;
         [SerializeField] private GameObject _User;
         private UserData u;
-        private string _userName;
-        private string _imageUri;
-        private Sprite _userImage;
-        
+
         protected override void Awake()
         {
             base.Awake();
@@ -29,42 +26,13 @@ namespace _Scripts.ScreenControllers
             SetData();
         }
         
-        private async void  SetData()
+        private void  SetData()
         {
             foreach (var t in u.users)
             {
-                _userName = t.username;
-                _imageUri = t.image;
-                var user = Instantiate(_User, _parent.transform) ;
-                user.GetComponentInChildren<TextMeshProUGUI>().text = _userName;
-                await GetTexture(_imageUri); 
-                user.GetComponentInChildren<Image>().sprite = _userImage;
-                StoreUserData(t, _userImage, user);
+                var user = Instantiate(_User, _parent.transform);
+                user.GetComponent<UserDataController>().SetUserData(t);
             }
-        }
-        
-        private async Task GetTexture(string uri) {
-          using UnityWebRequest www = UnityWebRequestTexture.GetTexture(uri);
-          var operation =  www.SendWebRequest();
-
-          while (!operation.isDone)
-              await Task.Yield();
-            
-          if (www.result != UnityWebRequest.Result.Success)
-          {
-              Debug.Log(www.error);
-          }
-          else
-          {
-              Texture2D myTexture = ((DownloadHandlerTexture)www.downloadHandler).texture;
-              _userImage = Sprite.Create(myTexture, new Rect(0, 0, myTexture.width, myTexture.height),
-                  new Vector2(0.5f, 0.5f));
-          }
-        }
-        private void StoreUserData(User u, Sprite userImage, GameObject user)
-        {
-            user.GetComponent<UserDataController>().user = u;
-            user.GetComponent<UserDataController>()._ProfilePic = userImage;
         }
     }
 }
