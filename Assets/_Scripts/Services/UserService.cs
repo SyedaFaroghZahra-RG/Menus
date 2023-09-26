@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using _Scripts.Core;
 using _Scripts.StaticData;
 using UnityEngine;
 
-namespace _Scripts.APICalls
+namespace _Scripts.Services
 {
     public class UserService : IUserService
     {

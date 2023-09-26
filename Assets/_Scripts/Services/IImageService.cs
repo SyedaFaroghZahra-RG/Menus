@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace _Scripts.APICalls
+namespace _Scripts.Services
 {
     public interface IImageService
     {

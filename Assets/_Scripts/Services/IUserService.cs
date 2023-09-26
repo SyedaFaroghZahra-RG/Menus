@@ -1,4 +1,6 @@
-﻿namespace _Scripts.APICalls
+﻿using _Scripts.Core;
+
+namespace _Scripts.Services
 {
     public interface IUserService
     {

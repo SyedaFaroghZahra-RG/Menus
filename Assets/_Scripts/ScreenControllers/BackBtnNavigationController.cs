@@ -1,7 +1,5 @@
-using System;
 using deVoid.UIFramework;
 using deVoid.Utils;
-using UnityEngine.UI;
 
 namespace _Scripts.ScreenControllers
 {

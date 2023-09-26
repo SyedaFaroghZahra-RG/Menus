@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace _Scripts.APICalls
+namespace _Scripts.Services
 {
     public class ImageService : IImageService
     {

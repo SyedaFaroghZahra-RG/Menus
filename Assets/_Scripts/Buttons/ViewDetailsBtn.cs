@@ -1,12 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using _Scripts.APICalls;
 using _Scripts.Core;
-using _Scripts.ScreenControllers;
+using _Scripts.Services;
 using deVoid.Utils;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class ViewDetailsBtn : MonoBehaviour
