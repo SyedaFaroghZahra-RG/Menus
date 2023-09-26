@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using _Scripts.APICalls;
+using _Scripts.Core;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -12,14 +14,15 @@ public class UserDataController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _userName;
     [SerializeField] private Image _ProfilePic;
     public User user { get; private set; }
-    public Sprite isprite { get; private set; }
+    public int UserID { get; private set; }
+
     public async void SetUserData(User u)
     {
          user = u;
+         UserID = u.id;
         _userName.text = user.username;
-         Sprite image =  await GetTexture(u.image);
-        _ProfilePic.sprite = image;
-         isprite = image;
+        _ProfilePic.sprite =  await GetTexture(u.image);
+        ServiceLocator.Instance.GetService<IImageService>().SetImage(_ProfilePic.sprite, UserID);
     }
     
     private async Task<Sprite> GetTexture(string uri) {

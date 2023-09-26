@@ -1,10 +1,13 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using _Scripts.StaticData;
 using UnityEngine;
+using UnityEngine.UI;
+
 namespace _Scripts.APICalls
 {
-    public class HandleUserDataService : IUserService
+    public class UserService : IUserService
     {
         public UserData GetUserData()
         {

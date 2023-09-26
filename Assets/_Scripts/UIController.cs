@@ -16,7 +16,9 @@ public class UIController : MonoBehaviour
 
     private void Awake()
     {
-        ServiceLocator.Instance.Register<IUserService>(new HandleUserDataService());
+        ServiceLocator.Instance.Register<IUserService>(new UserService());
+        ServiceLocator.Instance.Register<IImageService>(new ImageService());
+        
         
         _uiFrame = _defaultUISettings.CreateUIInstance();
         Signals.Get<ViewUserDetailsSignal>().AddListener(ViewUserDetails);

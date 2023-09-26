@@ -19,11 +19,7 @@ namespace _Scripts.Core
                 return _locator;
             }
         }
-        private ServiceLocator()
-        {
-        }
-
-        private IUserService HandleUserDataService = null;
+        private ServiceLocator() { }
         
         private Dictionary<Type, object> registry = new Dictionary<Type, object>();
         
