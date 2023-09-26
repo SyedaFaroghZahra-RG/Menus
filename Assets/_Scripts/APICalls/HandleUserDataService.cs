@@ -4,7 +4,7 @@ using _Scripts.StaticData;
 using UnityEngine;
 namespace _Scripts.APICalls
 {
-    public class HandleUserDataService : IGameService
+    public class HandleUserDataService : IUserService
     {
         public UserData GetUserData()
         {

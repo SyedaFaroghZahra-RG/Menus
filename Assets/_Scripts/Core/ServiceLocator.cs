@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using _Scripts.APICalls;
 
-namespace _Scripts.ServiceLocator
+namespace _Scripts.Core
 {
     public class ServiceLocator
     {
@@ -16,7 +16,6 @@ namespace _Scripts.ServiceLocator
                 {
                     _locator = new ServiceLocator();
                 }
-
                 return _locator;
             }
         }
@@ -24,18 +23,11 @@ namespace _Scripts.ServiceLocator
         {
         }
 
-        private IGameService HandleUserDataService = null;
-        public IGameService GetIGameService()
-        {
-            if (HandleUserDataService == null)
-            {
-                HandleUserDataService = new HandleUserDataService();
-            }
-            return HandleUserDataService;
-        }
-        //private Dictionary<Type, object> registry = new Dictionary<Type, object>();
+        private IUserService HandleUserDataService = null;
         
-        /*public void Register<T>(T serviceInstance)
+        private Dictionary<Type, object> registry = new Dictionary<Type, object>();
+        
+        public void Register<T>(T serviceInstance)
         {
             registry[typeof(T)] = serviceInstance;
         }
@@ -43,6 +35,6 @@ namespace _Scripts.ServiceLocator
         {
             T serviceInstance = (T)registry[typeof(T)];
             return serviceInstance;
-        }*/
+        }
     }
 }

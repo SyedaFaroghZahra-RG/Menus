@@ -1,6 +1,6 @@
 ﻿namespace _Scripts.APICalls
 {
-    public interface IGameService
+    public interface IUserService
     {
         UserData GetUserData();
     }

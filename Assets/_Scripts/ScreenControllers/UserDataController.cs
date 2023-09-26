@@ -15,11 +15,11 @@ public class UserDataController : MonoBehaviour
     public Sprite isprite { get; private set; }
     public async void SetUserData(User u)
     {
-        user = u;
+         user = u;
         _userName.text = user.username;
-        Sprite image =  await GetTexture(u.image);
+         Sprite image =  await GetTexture(u.image);
         _ProfilePic.sprite = image;
-        isprite = image;
+         isprite = image;
     }
     
     private async Task<Sprite> GetTexture(string uri) {

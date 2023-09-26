@@ -9,12 +9,10 @@ using UnityEngine.UI;
 
 public class ViewDetailsBtn : MonoBehaviour
 {
-    [SerializeField] private Button _thisButton;
-
-    public int buttonId { get; set; }
-    // Start is called before the first frame update
+    private Button _thisButton;
     void Start()
     {
+        _thisButton = this.GetComponent<Button>();
         _thisButton.onClick.AddListener(UI_ViewDetails);
     }
 

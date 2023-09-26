@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _Scripts.APICalls;
+using _Scripts.Core;
 using _Scripts.ScreenControllers;
 using _Scripts.StaticData;
 using deVoid.UIFramework;
@@ -14,6 +16,8 @@ public class UIController : MonoBehaviour
 
     private void Awake()
     {
+        ServiceLocator.Instance.Register<IUserService>(new HandleUserDataService());
+        
         _uiFrame = _defaultUISettings.CreateUIInstance();
         Signals.Get<ViewUserDetailsSignal>().AddListener(ViewUserDetails);
         Signals.Get<NavigateToPreviousScreenSignal>().AddListener(OnPreviousWindow);
