@@ -13,18 +13,23 @@ public class UserDataController : MonoBehaviour
     [SerializeField] private Image _ProfilePic;
     public int UserID { get; private set; }
 
-    public async void SetUserData(User u)
+    public void SetUserData(User u)
     {
          user = u;
          UserID = u.id;
         _userName.text = user.username;
-        _ProfilePic.sprite =  await GetTexture(u.image);
-        
-        ServiceLocator.Instance.GetService<IUserService>().SetUserData(user, UserID);
-        ServiceLocator.Instance.GetService<IImageService>().SetImage(_ProfilePic.sprite, UserID);
+        //_ProfilePic.sprite =  await GetTexture(u.image);
+         ServiceLocator.Instance.GetService<IUserService>().SetUserData(user, UserID);
+         ServiceLocator.Instance.GetService<IImageService>().SetImage(user.image, UserID);
+        _ProfilePic.sprite = ServiceLocator.Instance.GetService<IImageService>().GetImage(UserID);
     }
     
-    private async Task<Sprite> GetTexture(string uri) {
+    
+    
+    
+    
+    
+    /*private async Task<Sprite> GetTexture(string uri) {
         using UnityWebRequest www = UnityWebRequestTexture.GetTexture(uri);
         var operation =  www.SendWebRequest();
 
@@ -42,5 +47,5 @@ public class UserDataController : MonoBehaviour
             return Sprite.Create(myTexture, new Rect(0, 0, myTexture.width, myTexture.height),
                 new Vector2(0.5f, 0.5f));
         }
-    }
+    }*/
 }
