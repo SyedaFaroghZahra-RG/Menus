@@ -2,20 +2,19 @@
 using System.IO;
 using System.Net;
 using _Scripts.Core;
-using _Scripts.StaticData;
 using UnityEngine;
 
 namespace _Scripts.Services
 {
     public class UserService : IUserService
     {
-        public UserData GetUserData()
+        public T GetUserData<T>(string API)
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(StaticDataAPIs.UserDataAPI);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(API);
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             StreamReader reader = new StreamReader(response.GetResponseStream());
             string json = reader.ReadToEnd();
-            UserData users = JsonUtility.FromJson<UserData>(json);
+            T users = JsonUtility.FromJson<T>(json);
             return users;
         }
         

@@ -1,5 +1,6 @@
 using _Scripts.Core;
 using _Scripts.Services;
+using _Scripts.StaticData;
 using deVoid.UIFramework;
 using UnityEngine;
 
@@ -14,7 +15,7 @@ namespace _Scripts.ScreenControllers
         protected override void Awake()
         {
             base.Awake();
-            u = ServiceLocator.Instance.GetService<IUserService>().GetUserData();
+            u = ServiceLocator.Instance.GetService<IUserService>().GetUserData<UserData>(StaticDataAPIs.UserDataAPI);
             SetData();
         }
         
