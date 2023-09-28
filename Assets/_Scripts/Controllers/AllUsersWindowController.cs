@@ -16,12 +16,13 @@ namespace _Scripts.ScreenControllers
         {
             base.Awake();
             u = ServiceLocator.Instance.GetService<INetworkService>().GetData<UserData>(StaticDataAPIs.UserDataAPI);
+            Debug.Log(u.results.Count);
             SetData();
         }
         
         private void  SetData()
         {
-            foreach (var t in u.users)
+            foreach (var t in u.results)
             {
                 var user = Instantiate(_User, _parent.transform);
                 user.GetComponent<UserDataController>().SetUserData(t);

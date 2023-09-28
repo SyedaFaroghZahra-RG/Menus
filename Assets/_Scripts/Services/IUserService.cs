@@ -4,7 +4,7 @@ namespace _Scripts.Services
 {
     public interface IUserService
     {
-        public void SetUserData(User user, int key);
-        public User AccessUserData(int key);
+        public void SetUserData(Result user, string key);
+        public Result AccessUserData(string key);
     }
 }

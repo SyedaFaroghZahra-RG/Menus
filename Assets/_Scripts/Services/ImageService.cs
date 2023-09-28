@@ -7,16 +7,16 @@ namespace _Scripts.Services
 {
     public class ImageService : IImageService
     {
-        private Dictionary<int, Sprite> images = new Dictionary<int, Sprite>();
+        private Dictionary<string, Sprite> images = new Dictionary<string, Sprite>();
 
-        public void  SetImage(Sprite UserImage, int key)
+        public void  SetImage(Sprite Image, string key)
         {
             if (!images.ContainsKey(key))
             {
-                images.Add(key,UserImage);
+                images.Add(key, Image);
             }
         }
-        public Sprite GetImage(int key)
+        public Sprite GetImage(string key)
         {
             if (!images.ContainsKey(key))
             {

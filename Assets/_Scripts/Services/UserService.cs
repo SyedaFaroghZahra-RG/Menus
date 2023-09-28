@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.IO;
-using System.Net;
 using _Scripts.Core;
 using UnityEngine;
 
@@ -8,9 +6,9 @@ namespace _Scripts.Services
 {
     public class UserService : IUserService
     {
-        private Dictionary<int, User> users = new Dictionary<int, User>();
+        private Dictionary<string, Result> users = new Dictionary<string, Result>();
 
-        public void  SetUserData(User user, int key)
+        public void  SetUserData(Result user, string key)
         {
             if (!users.ContainsKey(key))
             {
@@ -18,7 +16,7 @@ namespace _Scripts.Services
             }
         }
 
-        public User AccessUserData(int key)
+        public Result AccessUserData(string key)
         {
             if (!users.ContainsKey(key))
             {

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5037286326185594967}
   - component: {fileID: 6376622058544114725}
   m_Layer: 5
-  m_Name: Blood Group
+  m_Name: Country
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Blood Group
+  m_text: Country
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f1d313d6b85209f42ac3e3134aa0fc97, type: 2}
   m_sharedMaterial: {fileID: -7222936341576764244, guid: f1d313d6b85209f42ac3e3134aa0fc97, type: 2}
@@ -282,7 +282,7 @@ GameObject:
   - component: {fileID: 6444001647703842166}
   - component: {fileID: 2234854346926805642}
   m_Layer: 5
-  m_Name: Blood Group
+  m_Name: Country
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -440,7 +440,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -296, y: -216}
+  m_AnchoredPosition: {x: -296, y: -416}
   m_SizeDelta: {x: 128, y: 128}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2608285844838782036
@@ -516,8 +516,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00000166893, y: 0}
-  m_SizeDelta: {x: 114.30395, y: 18.2742}
+  m_AnchoredPosition: {x: 0.47096, y: 1.8839}
+  m_SizeDelta: {x: 173.64679, y: 19.2161}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2608285844918285734
 CanvasRenderer:
@@ -717,10 +717,10 @@ MonoBehaviour:
   _userImage: {fileID: 2608285844838782037}
   _firstName: {fileID: 4361213793231401047}
   _lastName: {fileID: 6041443766891243522}
-  _height: {fileID: 3946637883527905580}
-  _weight: {fileID: 3992719195252520798}
-  _eyecolor: {fileID: 344514818850333441}
-  _bloodgroup: {fileID: 2234854346926805642}
+  _age: {fileID: 3992719195252520798}
+  _email: {fileID: 3946637883527905580}
+  _city: {fileID: 344514818850333441}
+  _country: {fileID: 2234854346926805642}
 --- !u!95 &4283011106628884515
 Animator:
   serializedVersion: 5
@@ -777,8 +777,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.0023613, y: -138.1664}
-  m_SizeDelta: {x: 124.36, y: 117.6672}
+  m_AnchoredPosition: {x: 17.3365, y: -145.53265}
+  m_SizeDelta: {x: 194.0576, y: 124.6018}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2608285845236300649
 CanvasRenderer:
@@ -1055,7 +1055,7 @@ GameObject:
   - component: {fileID: 7578998588640965019}
   - component: {fileID: 3992719195252520798}
   m_Layer: 5
-  m_Name: Weight
+  m_Name: Age
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1190,7 +1190,7 @@ GameObject:
   - component: {fileID: 1889249065045896504}
   - component: {fileID: 3333060090231221681}
   m_Layer: 5
-  m_Name: Weight
+  m_Name: Age
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1244,7 +1244,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Weight
+  m_text: Age
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f1d313d6b85209f42ac3e3134aa0fc97, type: 2}
   m_sharedMaterial: {fileID: -7222936341576764244, guid: f1d313d6b85209f42ac3e3134aa0fc97, type: 2}
@@ -1325,7 +1325,7 @@ GameObject:
   - component: {fileID: 770921355898349021}
   - component: {fileID: 344514818850333441}
   m_Layer: 5
-  m_Name: EyeColor
+  m_Name: City
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1460,7 +1460,7 @@ GameObject:
   - component: {fileID: 8463722580034224840}
   - component: {fileID: 492330389862394437}
   m_Layer: 5
-  m_Name: Height
+  m_Name: Email
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1514,9 +1514,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Height
-
-'
+  m_text: Email
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f1d313d6b85209f42ac3e3134aa0fc97, type: 2}
   m_sharedMaterial: {fileID: -7222936341576764244, guid: f1d313d6b85209f42ac3e3134aa0fc97, type: 2}
@@ -1597,7 +1595,7 @@ GameObject:
   - component: {fileID: 4703439607274977743}
   - component: {fileID: 2255981855154481172}
   m_Layer: 5
-  m_Name: EyeColor
+  m_Name: City
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1651,7 +1649,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Eye Color
+  m_text: City
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f1d313d6b85209f42ac3e3134aa0fc97, type: 2}
   m_sharedMaterial: {fileID: -7222936341576764244, guid: f1d313d6b85209f42ac3e3134aa0fc97, type: 2}
@@ -2253,7 +2251,7 @@ GameObject:
   - component: {fileID: 6685864515696574199}
   - component: {fileID: 3946637883527905580}
   m_Layer: 5
-  m_Name: Height
+  m_Name: Email
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
