@@ -1,8 +1,11 @@
+using System;
+using _Scripts.Controllers;
 using _Scripts.Core;
 using _Scripts.Services;
 using _Scripts.StaticData;
 using deVoid.UIFramework;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace _Scripts.ScreenControllers
 {
@@ -10,14 +13,9 @@ namespace _Scripts.ScreenControllers
     {
         [SerializeField] private GameObject _parent;
         [SerializeField] private GameObject _User;
+        [SerializeField] private Button _backButton;
+        
         private UserData u;
-
-        protected override void Awake()
-        {
-            base.Awake();
-            u = ServiceLocator.Instance.GetService<INetworkService>().GetData<UserData>(StaticDataAPIs.UserDataAPI);
-            SetData();
-        }
         
         private void  SetData()
         {
@@ -26,6 +24,30 @@ namespace _Scripts.ScreenControllers
                 var user = Instantiate(_User, _parent.transform);
                 user.GetComponent<UserDataController>().SetUserData(t);
             }
+        }
+
+        protected override void AddListeners()
+        {
+            base.AddListeners();
+            _backButton.onClick.AddListener(HandleBackButton);
+        }
+
+        protected override void RemoveListeners()
+        {
+            base.RemoveListeners();
+            _backButton.onClick.RemoveListener(HandleBackButton);
+        }
+
+        private void HandleBackButton()
+        {
+            UI_Close();
+        }
+
+        protected override void OnPropertiesSet()
+        {
+            base.OnPropertiesSet();
+            u = ServiceLocator.Instance.GetService<INetworkService>().GetData<UserData>(StaticDataAPIs.UserDataAPI);
+            SetData();
         }
     }
 }

@@ -8,6 +8,7 @@ namespace _Scripts.Services
     {
         public T GetData<T>(string API)
         {
+            Debug.Log("i am called");
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(API);
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             StreamReader reader = new StreamReader(response.GetResponseStream());
