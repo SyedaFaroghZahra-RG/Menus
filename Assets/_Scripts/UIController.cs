@@ -15,7 +15,7 @@ public class UIController : MonoBehaviour
     {
         ServiceLocator.Instance.Register<IUserService>(new UserService());
         ServiceLocator.Instance.Register<IImageService>(new ImageService());
-        
+        ServiceLocator.Instance.Register<INetworkService>(new NetworkService());
         
         _uiFrame = _defaultUISettings.CreateUIInstance();
         Signals.Get<ViewUserDetailsSignal>().AddListener(ViewUserDetails);

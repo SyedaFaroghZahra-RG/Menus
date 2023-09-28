@@ -15,7 +15,7 @@ namespace _Scripts.ScreenControllers
         protected override void Awake()
         {
             base.Awake();
-            u = ServiceLocator.Instance.GetService<IUserService>().GetUserData<UserData>(StaticDataAPIs.UserDataAPI);
+            u = ServiceLocator.Instance.GetService<INetworkService>().GetData<UserData>(StaticDataAPIs.UserDataAPI);
             SetData();
         }
         
