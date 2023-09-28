@@ -9,19 +9,19 @@ using System.Collections.Generic;
         public string latitude;
         public string longitude;
     }
-[Serializable]
+    [Serializable]
     public class Dob
     {
         public DateTime date;
         public int age;
     }
-[Serializable]
+    [Serializable]
     public class Id
     {
         public string name;
         public string value;
     }
-[Serializable]
+    [Serializable]
     public class Info
     {
         public string seed;
@@ -29,7 +29,7 @@ using System.Collections.Generic;
         public int page;
         public string version;
     }
-[Serializable]
+    [Serializable]
     public class Location
     {
         public Street street;
@@ -40,7 +40,7 @@ using System.Collections.Generic;
         public Coordinates coordinates;
         public Timezone timezone;
     }
-[Serializable]
+    [Serializable]
     public class Login
     {
         public string uuid;
@@ -51,27 +51,27 @@ using System.Collections.Generic;
         public string sha1;
         public string sha256;
     }
-[Serializable]
+    [Serializable]
     public class Name
     {
         public string title;
         public string first;
         public string last;
     }
-[Serializable]
+    [Serializable]
     public class Picture
     {
         public string large;
         public string medium;
         public string thumbnail;
     }
-[Serializable]
+    [Serializable]
     public class Registered
     {
         public DateTime date;
         public int age;
     }
-[Serializable]
+    [Serializable]
     public class Result
     {
         public string gender;
@@ -87,19 +87,19 @@ using System.Collections.Generic;
         public Picture picture;
         public string nat;
     }
-[Serializable]
+    [Serializable]
     public class UserData
     {
         public List<Result> results;
         public Info info;
     }
-[Serializable]
+    [Serializable]
     public class Street
     {
         public int number;
         public string name;
     }
-[Serializable]
+    [Serializable]
     public class Timezone
     {
         public string offset;

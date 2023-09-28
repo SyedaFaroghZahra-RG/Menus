@@ -16,7 +16,6 @@ namespace _Scripts.ScreenControllers
         {
             base.Awake();
             u = ServiceLocator.Instance.GetService<INetworkService>().GetData<UserData>(StaticDataAPIs.UserDataAPI);
-            Debug.Log(u.results.Count);
             SetData();
         }
         

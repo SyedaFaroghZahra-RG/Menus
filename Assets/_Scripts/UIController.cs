@@ -20,11 +20,12 @@ public class UIController : MonoBehaviour
         _uiFrame = _defaultUISettings.CreateUIInstance();
         Signals.Get<ViewUserDetailsSignal>().AddListener(ViewUserDetails);
         Signals.Get<NavigateToPreviousScreenSignal>().AddListener(OnPreviousWindow);
+        Signals.Get<NavigateToAllUsersScreenSignal>().AddListener(AllUsersScreen);
     }
 
     private void Start()
     {
-        _uiFrame.OpenWindow(ScreenIDs.AllUsersWindow);
+        _uiFrame.OpenWindow(ScreenIDs.StartWindow);
     }
 
     private void ViewUserDetails(UserDetailsProperty userPayLoad)
@@ -36,5 +37,11 @@ public class UIController : MonoBehaviour
     {
         _uiFrame.CloseCurrentWindow();
         _uiFrame.HidePanel(ScreenIDs.BackBtnNavigation);
+    }
+
+    private void AllUsersScreen()
+    {
+        _uiFrame.OpenWindow(ScreenIDs.AllUsersWindow);
+        _uiFrame.ShowPanel(ScreenIDs.BackBtnNavigation);
     }
 }
