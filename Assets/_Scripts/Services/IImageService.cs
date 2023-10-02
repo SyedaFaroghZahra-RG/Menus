@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using UnityEngine;
 
 namespace _Scripts.Services
 {
@@ -6,5 +8,6 @@ namespace _Scripts.Services
     {
         public void SetImage(Sprite Image, string key);
         public Sprite GetImage(string key);
+        public IEnumerator GetImageTexture(string uri, Action<Sprite> callback);
     }
 }

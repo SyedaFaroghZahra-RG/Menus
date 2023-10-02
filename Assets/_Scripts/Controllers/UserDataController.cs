@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.Threading.Tasks;
 using _Scripts.Core;
 using _Scripts.Services;
@@ -13,36 +15,24 @@ namespace _Scripts.Controllers
         private Result user;
         [SerializeField] private TextMeshProUGUI _userName;
         [SerializeField] private Image _ProfilePic;
-        public string UserID { get; private set; }
+        private Sprite pic;
+        
+        public string UserID { get; set; }
 
-        public async void SetUserData(Result u)
+        private void Start()
         {
-            user = u;
-            UserID = u.id.value;
-            _userName.text = user.login.username;
-            _ProfilePic.sprite =  await GetTexture(u.picture.medium);
-            ServiceLocator.Instance.GetService<IUserService>().SetUserData(user, UserID);
-            ServiceLocator.Instance.GetService<IImageService>().SetImage(_ProfilePic.sprite, UserID);
+            SetUserData();
         }
-    
-        private async Task<Sprite> GetTexture(string uri) {
-            using UnityWebRequest www = UnityWebRequestTexture.GetTexture(uri);
-            var operation =  www.SendWebRequest();
 
-            while (!operation.isDone)
-                await Task.Yield();
-            
-            if (www.result != UnityWebRequest.Result.Success)
-            {
-                Debug.Log(www.error);
-                return null;
-            }
-            else
-            {
-                Texture2D myTexture = ((DownloadHandlerTexture)www.downloadHandler).texture;
-                return Sprite.Create(myTexture, new Rect(0, 0, myTexture.width, myTexture.height),
-                    new Vector2(0.5f, 0.5f));
-            }
+        private void SetUserData()
+        {
+            user = ServiceLocator.Instance.GetService<IUserService>().AccessUserData(UserID);
+            _userName.text = user.login.username;
+            StartCoroutine(ServiceLocator.Instance.GetService<IImageService>().GetImageTexture(user.picture.medium, (sprite) => {
+                _ProfilePic.sprite = sprite;
+                ServiceLocator.Instance.GetService<IUserService>().SetUserData(user, UserID);
+                ServiceLocator.Instance.GetService<IImageService>().SetImage(sprite, UserID);
+            }));
         }
     }
 }

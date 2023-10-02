@@ -22,7 +22,8 @@ namespace _Scripts.ScreenControllers
             foreach (var t in u.results)
             {
                 var user = Instantiate(_User, _parent.transform);
-                user.GetComponent<UserDataController>().SetUserData(t);
+                user.GetComponent<UserDataController>().UserID = t.id.value;
+                ServiceLocator.Instance.GetService<IUserService>().SetUserData(t, t.id.value);
             }
         }
 
