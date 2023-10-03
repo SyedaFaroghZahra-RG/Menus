@@ -1,6 +1,4 @@
 using System;
-using _Scripts.Core;
-using _Scripts.Services;
 using deVoid.UIFramework;
 using deVoid.Utils;
 using TMPro;
@@ -43,8 +41,6 @@ namespace _Scripts.Controllers
             _email.text = Properties._user.email;
             _city.text = Properties._user.location.city;
             _country.text = Properties._user.location.country;
-            
-            ServiceLocator.Instance.GetService<IUserService>().ShouldCallAPISetter(false);
         }
 
         protected override void AddListeners()
