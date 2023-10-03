@@ -22,7 +22,7 @@ public class ViewDetailsBtn : MonoBehaviour
     {
         string uid = GetComponentInParent<UserDataController>().UserID;
         Result user = ServiceLocator.Instance.GetService<IUserService>().GetUserData(uid);
-        Sprite userImage = ServiceLocator.Instance.GetService<IImageService>().GetImage(uid);
+        Sprite userImage = ServiceLocator.Instance.GetService<IImageService>().GetImage(user.picture.medium);
         UserDetailsProperty UserProps = new UserDetailsProperty(user, userImage);
         return UserProps;
     }

@@ -38,8 +38,11 @@ namespace _Scripts.Core
             else
             {
                 InstantiatePool();
+                GameObject user = _userPool.Dequeue();
+                user.transform.SetParent(transform, false);
+                user.SetActive(true);
+                return user;
             }
-            return null;
         }
     
         public void ReturnUserToPool(GameObject enemy)

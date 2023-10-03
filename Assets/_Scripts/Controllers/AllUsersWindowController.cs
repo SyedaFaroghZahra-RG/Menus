@@ -30,8 +30,6 @@ namespace _Scripts.ScreenControllers
     
     public class AllUsersWindowController : AWindowController<AllUsersWindowProperty>
     {
-        //[SerializeField] private GameObject _parent;
-        //[SerializeField] private GameObject _User;
         [SerializeField] private GameObject _grid;
         [SerializeField] private Button _backButton;
         
@@ -40,20 +38,19 @@ namespace _Scripts.ScreenControllers
         
         private void  SetData()
         {
-            if (ServiceLocator.Instance.GetService<IUserService>().isEmpty())
-            {
+           // if (ServiceLocator.Instance.GetService<IUserService>().isEmpty())
+           // {
                 foreach (var t in u.results)
                 {
                     var user = _userPool.GetUserFromPool(_grid.transform);
-                    //var user = Instantiate(_User, _parent.transform);
                     user.GetComponent<UserDataController>().UserID = t.login.uuid;
                     ServiceLocator.Instance.GetService<IUserService>().SetUserData(t, t.login.uuid);
                 }
-            }
-            else
-            {
+           // }
+           // else
+           // {
                 
-            }
+           // }
         }
 
         protected override void AddListeners()
@@ -82,9 +79,9 @@ namespace _Scripts.ScreenControllers
         protected override void OnPropertiesSet()
         {
             base.OnPropertiesSet();
-            _userPool = FindObjectOfType<UserPool>();
             if (Properties.getterCallAPI())
             {
+                _userPool = FindObjectOfType<UserPool>();
                 u = ServiceLocator.Instance.GetService<INetworkService>().GetData<UserData>(StaticDataAPIs.UserDataAPI);
                 SetData();
             }
