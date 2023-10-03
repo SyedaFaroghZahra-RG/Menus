@@ -1,4 +1,5 @@
 using System;
+using _Scripts.ScreenControllers;
 using deVoid.UIFramework;
 using deVoid.Utils;
 using UnityEngine;
@@ -6,7 +7,7 @@ using UnityEngine.UI;
 
 namespace _Scripts.Controllers
 {
-    public class NavigateToAllUsersScreenSignal : ASignal { } 
+    public class NavigateToAllUsersScreenSignal : ASignal<AllUsersWindowProperty> { } 
     public class StartScreenController : AWindowController
     {
 
@@ -26,10 +27,15 @@ namespace _Scripts.Controllers
             AllUsersButton.onClick.RemoveListener(HandleAllUsersButton);
         }
         
-
         private void HandleAllUsersButton()
         {
-            Signals.Get<NavigateToAllUsersScreenSignal>().Dispatch();
+            Signals.Get<NavigateToAllUsersScreenSignal>().Dispatch(ShouldCallAPI());
+        }
+
+        private AllUsersWindowProperty ShouldCallAPI()
+        {
+            AllUsersWindowProperty property = new AllUsersWindowProperty(true);
+            return property;
         }
     }
 }

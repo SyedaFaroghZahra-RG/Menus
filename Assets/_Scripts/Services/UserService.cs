@@ -8,7 +8,7 @@ namespace _Scripts.Services
     {
         private Dictionary<string, Result> users = new Dictionary<string, Result>();
 
-        public void  SetUserData(Result user, string key)
+        public void SetUserData(Result user, string key)
         {
             if (!users.ContainsKey(key))
             {
@@ -16,7 +16,16 @@ namespace _Scripts.Services
             }
         }
 
-        public Result AccessUserData(string key)
+        public bool ContainsKey(string key)
+        {
+            if (users.ContainsKey(key))
+            {
+                return true;
+            }
+
+            return false;
+        }
+        public Result GetUserData(string key)
         {
             if (!users.ContainsKey(key))
             {

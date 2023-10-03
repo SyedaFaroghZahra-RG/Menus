@@ -27,6 +27,13 @@ namespace _Scripts.Services
             return images[key];
         }
 
+        public bool ContainsKey(string key)
+        {
+            if (images.ContainsKey(key))
+                return true;
+            return false;
+        }
+
         public IEnumerator GetImageTexture(string uri, Action<Sprite> callback)
         {
             UnityWebRequest www = UnityWebRequestTexture.GetTexture(uri);

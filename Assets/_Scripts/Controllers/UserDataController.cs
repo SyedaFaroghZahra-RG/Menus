@@ -15,8 +15,7 @@ namespace _Scripts.Controllers
         private Result user;
         [SerializeField] private TextMeshProUGUI _userName;
         [SerializeField] private Image _ProfilePic;
-        private Sprite pic;
-        
+
         public string UserID { get; set; }
 
         private void Start()
@@ -26,13 +25,20 @@ namespace _Scripts.Controllers
 
         private void SetUserData()
         {
-            user = ServiceLocator.Instance.GetService<IUserService>().AccessUserData(UserID);
+            user = ServiceLocator.Instance.GetService<IUserService>().GetUserData(UserID);
             _userName.text = user.login.username;
-            StartCoroutine(ServiceLocator.Instance.GetService<IImageService>().GetImageTexture(user.picture.medium, (sprite) => {
-                _ProfilePic.sprite = sprite;
-                ServiceLocator.Instance.GetService<IUserService>().SetUserData(user, UserID);
-                ServiceLocator.Instance.GetService<IImageService>().SetImage(sprite, UserID);
-            }));
+            if (ServiceLocator.Instance.GetService<IImageService>().ContainsKey(UserID))
+            {
+                _ProfilePic.sprite = ServiceLocator.Instance.GetService<IImageService>().GetImage(UserID);
+            }
+            else
+            {
+                StartCoroutine(ServiceLocator.Instance.GetService<IImageService>().GetImageTexture(user.picture.medium, (sprite) => {
+                    _ProfilePic.sprite = sprite;
+                    ServiceLocator.Instance.GetService<IUserService>().SetUserData(user, UserID);
+                    ServiceLocator.Instance.GetService<IImageService>().SetImage(sprite, UserID);
+                }));
+            }
         }
     }
 }

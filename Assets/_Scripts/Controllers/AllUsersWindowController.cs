@@ -9,7 +9,26 @@ using UnityEngine.UI;
 
 namespace _Scripts.ScreenControllers
 {
-    public class AllUsersWindowController : AWindowController
+    [Serializable]
+    public class AllUsersWindowProperty : WindowProperties
+    {
+        private bool _callAPI;
+        public AllUsersWindowProperty(bool callAPI)
+        {
+            _callAPI = callAPI;
+        }
+        public void setterCallAPI(bool callAPI)
+        {
+            _callAPI = callAPI;
+        }
+
+        public bool getterCallAPI()
+        {
+            return _callAPI;
+        }
+    }
+    
+    public class AllUsersWindowController : AWindowController<AllUsersWindowProperty>
     {
         [SerializeField] private GameObject _parent;
         [SerializeField] private GameObject _User;
@@ -22,8 +41,8 @@ namespace _Scripts.ScreenControllers
             foreach (var t in u.results)
             {
                 var user = Instantiate(_User, _parent.transform);
-                user.GetComponent<UserDataController>().UserID = t.id.value;
-                ServiceLocator.Instance.GetService<IUserService>().SetUserData(t, t.id.value);
+                user.GetComponent<UserDataController>().UserID = t.login.uuid;
+                ServiceLocator.Instance.GetService<IUserService>().SetUserData(t, t.login.uuid);
             }
         }
 
@@ -39,6 +58,12 @@ namespace _Scripts.ScreenControllers
             _backButton.onClick.RemoveListener(HandleBackButton);
         }
 
+        protected override void WhileHiding()
+        {
+            base.WhileHiding();
+            Properties.setterCallAPI(false);
+        }
+
         private void HandleBackButton()
         {
             UI_Close();
@@ -47,8 +72,11 @@ namespace _Scripts.ScreenControllers
         protected override void OnPropertiesSet()
         {
             base.OnPropertiesSet();
-            u = ServiceLocator.Instance.GetService<INetworkService>().GetData<UserData>(StaticDataAPIs.UserDataAPI);
-            SetData();
+            if (Properties.getterCallAPI())
+            {
+                u = ServiceLocator.Instance.GetService<INetworkService>().GetData<UserData>(StaticDataAPIs.UserDataAPI);
+                SetData();
+            }
         }
     }
 }
