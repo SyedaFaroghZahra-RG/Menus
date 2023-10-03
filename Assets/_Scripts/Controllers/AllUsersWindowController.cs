@@ -30,19 +30,29 @@ namespace _Scripts.ScreenControllers
     
     public class AllUsersWindowController : AWindowController<AllUsersWindowProperty>
     {
-        [SerializeField] private GameObject _parent;
-        [SerializeField] private GameObject _User;
+        //[SerializeField] private GameObject _parent;
+        //[SerializeField] private GameObject _User;
+        [SerializeField] private GameObject _grid;
         [SerializeField] private Button _backButton;
         
         private UserData u;
+        private UserPool _userPool;
         
         private void  SetData()
         {
-            foreach (var t in u.results)
+            if (ServiceLocator.Instance.GetService<IUserService>().isEmpty())
             {
-                var user = Instantiate(_User, _parent.transform);
-                user.GetComponent<UserDataController>().UserID = t.login.uuid;
-                ServiceLocator.Instance.GetService<IUserService>().SetUserData(t, t.login.uuid);
+                foreach (var t in u.results)
+                {
+                    var user = _userPool.GetUserFromPool(_grid.transform);
+                    //var user = Instantiate(_User, _parent.transform);
+                    user.GetComponent<UserDataController>().UserID = t.login.uuid;
+                    ServiceLocator.Instance.GetService<IUserService>().SetUserData(t, t.login.uuid);
+                }
+            }
+            else
+            {
+                
             }
         }
 
@@ -72,6 +82,7 @@ namespace _Scripts.ScreenControllers
         protected override void OnPropertiesSet()
         {
             base.OnPropertiesSet();
+            _userPool = FindObjectOfType<UserPool>();
             if (Properties.getterCallAPI())
             {
                 u = ServiceLocator.Instance.GetService<INetworkService>().GetData<UserData>(StaticDataAPIs.UserDataAPI);

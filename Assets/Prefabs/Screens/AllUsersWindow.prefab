@@ -704,8 +704,7 @@ MonoBehaviour:
     hideOnForegroundLost: 1
     windowQueuePriority: 0
     isPopup: 0
-  _parent: {fileID: 3529168394590392191}
-  _User: {fileID: 7738941478297816567, guid: a1fd45f308132384684c7b4d6fd1e98f, type: 3}
+  _grid: {fileID: 3529168394590392191}
   _backButton: {fileID: 2770822339922998889}
 --- !u!1 &5274077097534240873
 GameObject:

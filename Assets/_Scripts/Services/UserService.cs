@@ -16,13 +16,10 @@ namespace _Scripts.Services
             }
         }
 
-        public bool ContainsKey(string key)
+        public bool isEmpty()
         {
-            if (users.ContainsKey(key))
-            {
+            if (users.Count == 0)
                 return true;
-            }
-
             return false;
         }
         public Result GetUserData(string key)
