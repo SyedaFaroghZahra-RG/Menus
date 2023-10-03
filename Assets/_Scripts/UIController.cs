@@ -32,8 +32,8 @@ public class UIController : MonoBehaviour
         _uiFrame.OpenWindow(ScreenIDs.UserDetailsWindow, userPayLoad);
     }
     
-    private void AllUsersScreen(AllUsersWindowProperty callAPI)
+    private void AllUsersScreen()
     {
-        _uiFrame.OpenWindow(ScreenIDs.AllUsersWindow, callAPI);
+        _uiFrame.OpenWindow(ScreenIDs.AllUsersWindow);
     }
 }

@@ -7,6 +7,7 @@ namespace _Scripts.Services
     public class UserService : IUserService
     {
         private Dictionary<string, Result> users = new Dictionary<string, Result>();
+        private bool _shouldCallAPI;
 
         public void SetUserData(Result user, string key)
         {
@@ -15,13 +16,7 @@ namespace _Scripts.Services
                 users.Add(key,user);
             }
         }
-
-        public bool isEmpty()
-        {
-            if (users.Count == 0)
-                return true;
-            return false;
-        }
+        
         public Result GetUserData(string key)
         {
             if (!users.ContainsKey(key))
@@ -30,7 +25,15 @@ namespace _Scripts.Services
             }
             return users[key];
         }
-        
-        
+
+        public bool ShouldCallAPIGetter()
+        {
+            return _shouldCallAPI;
+        }
+
+        public void ShouldCallAPISetter(bool call)
+        {
+            _shouldCallAPI = call;
+        }
     }
 }

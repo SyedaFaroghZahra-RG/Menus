@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using _Scripts.Controllers;
 using _Scripts.Core;
 using _Scripts.Services;
@@ -9,48 +10,25 @@ using UnityEngine.UI;
 
 namespace _Scripts.ScreenControllers
 {
-    [Serializable]
-    public class AllUsersWindowProperty : WindowProperties
-    {
-        private bool _callAPI;
-        public AllUsersWindowProperty(bool callAPI)
-        {
-            _callAPI = callAPI;
-        }
-        public void setterCallAPI(bool callAPI)
-        {
-            _callAPI = callAPI;
-        }
-
-        public bool getterCallAPI()
-        {
-            return _callAPI;
-        }
-    }
     
-    public class AllUsersWindowController : AWindowController<AllUsersWindowProperty>
+    public class AllUsersWindowController : AWindowController
     {
         [SerializeField] private GameObject _grid;
         [SerializeField] private Button _backButton;
         
         private UserData u;
         private UserPool _userPool;
-        
+        private List<GameObject> _allUsers;
         private void  SetData()
         {
-           // if (ServiceLocator.Instance.GetService<IUserService>().isEmpty())
-           // {
-                foreach (var t in u.results)
-                {
+            _allUsers = new List<GameObject>();
+             foreach (var t in u.results)
+             {
                     var user = _userPool.GetUserFromPool(_grid.transform);
                     user.GetComponent<UserDataController>().UserID = t.login.uuid;
                     ServiceLocator.Instance.GetService<IUserService>().SetUserData(t, t.login.uuid);
-                }
-           // }
-           // else
-           // {
-                
-           // }
+                    _allUsers.Add(user);
+             }
         }
 
         protected override void AddListeners()
@@ -67,10 +45,19 @@ namespace _Scripts.ScreenControllers
 
         protected override void WhileHiding()
         {
+            if (!ServiceLocator.Instance.GetService<IUserService>().ShouldCallAPIGetter())
+            {
+                foreach (var t in _allUsers)
+                {
+                    _userPool.ReturnUserToPool(t);
+                }
+                _allUsers.Clear();
+            }
+            ServiceLocator.Instance.GetService<IUserService>().ShouldCallAPISetter(true);
             base.WhileHiding();
-            Properties.setterCallAPI(false);
         }
-
+        
+        
         private void HandleBackButton()
         {
             UI_Close();
@@ -79,7 +66,7 @@ namespace _Scripts.ScreenControllers
         protected override void OnPropertiesSet()
         {
             base.OnPropertiesSet();
-            if (Properties.getterCallAPI())
+            if (ServiceLocator.Instance.GetService<IUserService>().ShouldCallAPIGetter())
             {
                 _userPool = FindObjectOfType<UserPool>();
                 u = ServiceLocator.Instance.GetService<INetworkService>().GetData<UserData>(StaticDataAPIs.UserDataAPI);

@@ -6,6 +6,7 @@ namespace _Scripts.Services
     {
         public void SetUserData(Result user, string key);
         public Result GetUserData(string key);
-        public bool isEmpty();
+        public bool ShouldCallAPIGetter();
+        public void ShouldCallAPISetter(bool call);
     }
 }

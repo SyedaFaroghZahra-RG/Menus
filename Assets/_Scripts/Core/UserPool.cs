@@ -45,20 +45,11 @@ namespace _Scripts.Core
             }
         }
     
-        public void ReturnUserToPool(GameObject enemy)
+        public void ReturnUserToPool(GameObject user)
         {
-            enemy.SetActive(false);
-            _userPool.Enqueue(enemy);
+            user.SetActive(false);
+            _userPool.Enqueue(user);
         }
-
-        public void ReturnAllToPool()
-        {
-            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            
-            foreach (var enemy in enemies)
-            {
-                enemy.SetActive(false);
-            }
-        }
+        
     }
 }
