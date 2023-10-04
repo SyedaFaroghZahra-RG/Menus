@@ -1,5 +1,4 @@
-using System;
-using _Scripts.Controllers;
+using System.Collections.Generic;
 using _Scripts.Core;
 using _Scripts.Services;
 using _Scripts.StaticData;
@@ -7,52 +6,39 @@ using deVoid.UIFramework;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace _Scripts.ScreenControllers
+namespace _Scripts.Controllers
 {
-    [Serializable]
-    public class AllUsersWindowProperty : WindowProperties
-    {
-        private bool _callAPI;
-        public AllUsersWindowProperty(bool callAPI)
-        {
-            _callAPI = callAPI;
-        }
-        public void setterCallAPI(bool callAPI)
-        {
-            _callAPI = callAPI;
-        }
-
-        public bool getterCallAPI()
-        {
-            return _callAPI;
-        }
-    }
-    
-    public class AllUsersWindowController : AWindowController<AllUsersWindowProperty>
+    public class AllUsersWindowController : AWindowController
     {
         [SerializeField] private GameObject _grid;
         [SerializeField] private Button _backButton;
-        
+        [SerializeField] private ScrollRect _scrollRect;
         private UserData u;
         private UserPool _userPool;
-        
+        private List<GameObject> _allUsers;
         private void  SetData()
         {
-           // if (ServiceLocator.Instance.GetService<IUserService>().isEmpty())
-           // {
-                foreach (var t in u.results)
-                {
-                    var user = _userPool.GetUserFromPool(_grid.transform);
-                    user.GetComponent<UserDataController>().UserID = t.login.uuid;
-                    ServiceLocator.Instance.GetService<IUserService>().SetUserData(t, t.login.uuid);
-                }
-           // }
-           // else
-           // {
-                
-           // }
+            _allUsers = new List<GameObject>();
+            foreach (var t in u.results)
+            {
+                var user = _userPool.GetUserFromPool(_grid.transform);
+                user.GetComponent<UserDataController>().UserID = t.login.uuid;
+                ServiceLocator.Instance.GetService<IUserService>().SetUserData(t, t.login.uuid);
+                _allUsers.Add(user);
+            }
         }
 
+        protected override void OnPropertiesSet()
+        {
+            base.OnPropertiesSet();
+            if (ServiceLocator.Instance.GetService<IUserService>().getterCallAPI())
+            {
+                _userPool = FindObjectOfType<UserPool>();
+                u = ServiceLocator.Instance.GetService<INetworkService>().GetData<UserData>(StaticDataAPIs.UserDataAPI);
+                _scrollRect.verticalNormalizedPosition = 1f;
+                SetData();
+            }
+        }
         protected override void AddListeners()
         {
             base.AddListeners();
@@ -68,23 +54,17 @@ namespace _Scripts.ScreenControllers
         protected override void WhileHiding()
         {
             base.WhileHiding();
-            Properties.setterCallAPI(false);
+            ServiceLocator.Instance.GetService<IUserService>().setterCallAPI(false);
         }
 
         private void HandleBackButton()
         {
-            UI_Close();
-        }
-
-        protected override void OnPropertiesSet()
-        {
-            base.OnPropertiesSet();
-            if (Properties.getterCallAPI())
+            foreach (var u in _allUsers)
             {
-                _userPool = FindObjectOfType<UserPool>();
-                u = ServiceLocator.Instance.GetService<INetworkService>().GetData<UserData>(StaticDataAPIs.UserDataAPI);
-                SetData();
+                _userPool.ReturnUserToPool(u);
             }
+            _allUsers.Clear();
+            UI_Close();
         }
     }
 }

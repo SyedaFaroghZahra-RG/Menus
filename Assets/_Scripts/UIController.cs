@@ -1,6 +1,5 @@
 using _Scripts.Controllers;
 using _Scripts.Core;
-using _Scripts.ScreenControllers;
 using _Scripts.Services;
 using _Scripts.StaticData;
 using deVoid.UIFramework;
@@ -32,8 +31,8 @@ public class UIController : MonoBehaviour
         _uiFrame.OpenWindow(ScreenIDs.UserDetailsWindow, userPayLoad);
     }
     
-    private void AllUsersScreen(AllUsersWindowProperty callAPI)
+    private void AllUsersScreen()
     {
-        _uiFrame.OpenWindow(ScreenIDs.AllUsersWindow, callAPI);
+        _uiFrame.OpenWindow(ScreenIDs.AllUsersWindow);
     }
 }

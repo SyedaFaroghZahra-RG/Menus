@@ -1,5 +1,5 @@
-using System;
-using _Scripts.ScreenControllers;
+using _Scripts.Core;
+using _Scripts.Services;
 using deVoid.UIFramework;
 using deVoid.Utils;
 using UnityEngine;
@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace _Scripts.Controllers
 {
-    public class NavigateToAllUsersScreenSignal : ASignal<AllUsersWindowProperty> { } 
+    public class NavigateToAllUsersScreenSignal : ASignal { } 
     public class StartScreenController : AWindowController
     {
 
@@ -29,13 +29,8 @@ namespace _Scripts.Controllers
         
         private void HandleAllUsersButton()
         {
-            Signals.Get<NavigateToAllUsersScreenSignal>().Dispatch(ShouldCallAPI());
-        }
-
-        private AllUsersWindowProperty ShouldCallAPI()
-        {
-            AllUsersWindowProperty property = new AllUsersWindowProperty(true);
-            return property;
+            ServiceLocator.Instance.GetService<IUserService>().setterCallAPI(true);
+            Signals.Get<NavigateToAllUsersScreenSignal>().Dispatch();
         }
     }
 }

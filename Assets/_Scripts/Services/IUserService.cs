@@ -1,11 +1,10 @@
-﻿using _Scripts.Core;
-
-namespace _Scripts.Services
+﻿namespace _Scripts.Services
 {
     public interface IUserService
     {
-        public void SetUserData(Result user, string key);
-        public Result GetUserData(string key);
-        public bool isEmpty();
+        public void SetUserData<T>(T user, string key) where T : class;
+        public T GetUserData<T>(string key) where T : class;
+        public void setterCallAPI(bool callAPI);
+        public bool getterCallAPI();
     }
 }

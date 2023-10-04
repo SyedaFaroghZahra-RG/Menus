@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+
 namespace _Scripts.Core
 {
     public class UserPool: MonoBehaviour
@@ -45,20 +46,10 @@ namespace _Scripts.Core
             }
         }
     
-        public void ReturnUserToPool(GameObject enemy)
+        public void ReturnUserToPool(GameObject user)
         {
-            enemy.SetActive(false);
-            _userPool.Enqueue(enemy);
-        }
-
-        public void ReturnAllToPool()
-        {
-            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            
-            foreach (var enemy in enemies)
-            {
-                enemy.SetActive(false);
-            }
+            user.SetActive(false);
+            _userPool.Enqueue(user);
         }
     }
 }
