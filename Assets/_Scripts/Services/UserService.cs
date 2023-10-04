@@ -22,6 +22,11 @@ namespace _Scripts.Services
             }
             return users[key] as T;
         }
+
+        public bool ContainsKey(string key)
+        {
+            return users.ContainsKey(key);
+        }
         public void setterCallAPI(bool callAPI)
         {
             _callAPI = callAPI;

@@ -6,5 +6,6 @@
         public T GetUserData<T>(string key) where T : class;
         public void setterCallAPI(bool callAPI);
         public bool getterCallAPI();
+        public bool ContainsKey(string key);
     }
 }

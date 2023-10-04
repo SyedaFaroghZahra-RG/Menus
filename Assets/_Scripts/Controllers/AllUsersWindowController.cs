@@ -23,7 +23,8 @@ namespace _Scripts.Controllers
             {
                 var user = _userPool.GetUserFromPool(_grid.transform);
                 user.GetComponent<UserDataController>().UserID = t.login.uuid;
-                ServiceLocator.Instance.GetService<IUserService>().SetUserData(t, t.login.uuid);
+                if(!ServiceLocator.Instance.GetService<IUserService>().ContainsKey(t.login.uuid))
+                    ServiceLocator.Instance.GetService<IUserService>().SetUserData(t, t.login.uuid);
                 _allUsers.Add(user);
             }
         }

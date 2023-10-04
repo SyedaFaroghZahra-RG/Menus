@@ -12,7 +12,6 @@ namespace _Scripts.Services
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             StreamReader reader = new StreamReader(response.GetResponseStream());
             string json = reader.ReadToEnd();
-            Debug.Log(json);
             T data = JsonUtility.FromJson<T>(json);
             return data;
         }

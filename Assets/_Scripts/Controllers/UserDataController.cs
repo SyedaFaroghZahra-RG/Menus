@@ -24,7 +24,8 @@ namespace _Scripts.Controllers
         
         private void OnEnable()
         {
-            SetUserData();
+            if(ServiceLocator.Instance.GetService<IUserService>().getterCallAPI())
+                SetUserData();
         }
 
         private void SetUserData()
@@ -40,7 +41,6 @@ namespace _Scripts.Controllers
             {
                 StartCoroutine(ServiceLocator.Instance.GetService<IImageService>().GetImageTexture(user.picture.medium, (sprite) => {
                     _ProfilePic.sprite = sprite;
-                    ServiceLocator.Instance.GetService<IUserService>().SetUserData(user, UserID);
                     ServiceLocator.Instance.GetService<IImageService>().SetImage(sprite, _ImageID);
                 }));
             }
