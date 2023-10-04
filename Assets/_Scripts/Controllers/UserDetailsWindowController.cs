@@ -9,6 +9,7 @@ namespace _Scripts.Controllers
 {
     public class ViewUserDetailsSignal : ASignal<UserDetailsProperty> { }
 
+    //using deVoid WindowProperties to define properties need on this screen
     [Serializable]
     public class UserDetailsProperty : WindowProperties
     {
@@ -20,6 +21,7 @@ namespace _Scripts.Controllers
             this._userImage = _userImage;
         }
     }
+    //User Details window displays different attributes of user, and contains a back button
     public class UserDetailsWindowController : AWindowController<UserDetailsProperty>
     {
         [SerializeField] private TextMeshProUGUI _userNameTitle;

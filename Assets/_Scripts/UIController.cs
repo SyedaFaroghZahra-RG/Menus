@@ -6,17 +6,22 @@ using deVoid.UIFramework;
 using deVoid.Utils;
 using UnityEngine;
 
+
+//Main Entry point of code
 public class UIController : MonoBehaviour
 {
     [SerializeField] private UISettings _defaultUISettings;
     private UIFrame _uiFrame;
     private void Awake()
     {
+        //Register Service Locator's here (can also make a separate bootstrap object)
         ServiceLocator.Instance.Register<IUserService>(new UserService());
         ServiceLocator.Instance.Register<IImageService>(new ImageService());
         ServiceLocator.Instance.Register<INetworkService>(new NetworkService());
         
         _uiFrame = _defaultUISettings.CreateUIInstance();
+        
+        //Listeners of Signals
         Signals.Get<ViewUserDetailsSignal>().AddListener(ViewUserDetails);
         Signals.Get<NavigateToAllUsersScreenSignal>().AddListener(AllUsersScreen);
     }
