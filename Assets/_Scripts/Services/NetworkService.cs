@@ -1,6 +1,7 @@
 using System.IO;
 using System.Net;
-using System.Text.Json;
+using UnityEngine;
+
 namespace _Scripts.Services
 {
     public class NetworkService : INetworkService
@@ -11,7 +12,7 @@ namespace _Scripts.Services
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             StreamReader reader = new StreamReader(response.GetResponseStream());
             string json = reader.ReadToEnd();
-            T data = JsonSerializer.Deserialize<T>(json);
+            T data = JsonUtility.FromJson<T>(json);
             return data;
         }
     }
