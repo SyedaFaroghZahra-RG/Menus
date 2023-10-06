@@ -1,7 +1,6 @@
 using System.IO;
 using System.Net;
-using UnityEngine;
-
+using Newtonsoft.Json;
 namespace _Scripts.Services
 {
     public class NetworkService : INetworkService
@@ -12,7 +11,7 @@ namespace _Scripts.Services
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             StreamReader reader = new StreamReader(response.GetResponseStream());
             string json = reader.ReadToEnd();
-            T data = JsonUtility.FromJson<T>(json);
+            T data = JsonConvert.DeserializeObject<T>(json);
             return data;
         }
     }
