@@ -1,7 +1,6 @@
 using System.IO;
 using System.Net;
 using UnityEngine;
-
 namespace _Scripts.Services
 {
     public class NetworkService : INetworkService
