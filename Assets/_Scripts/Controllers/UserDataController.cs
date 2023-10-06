@@ -49,10 +49,11 @@ namespace _Scripts.Controllers
             //else download image, display on screen and store in dict
             else
             {
-                StartCoroutine(ServiceLocator.Instance.GetService<IImageService>().GetImageTexture(user.picture.medium, (sprite) => {
+                ServiceLocator.Instance.GetService<IImageService>().GetImageTexture(user.picture.medium).Done(sprite =>
+                {
                     _ProfilePic.sprite = sprite;
                     ServiceLocator.Instance.GetService<IImageService>().SetImage(sprite, _ImageID);
-                }));
+                });
             }
         }
         private void UI_ViewDetails()

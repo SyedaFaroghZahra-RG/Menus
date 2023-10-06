@@ -1,6 +1,7 @@
 using System.IO;
 using System.Net;
 using Newtonsoft.Json;
+
 namespace _Scripts.Services
 {
     public class NetworkService : INetworkService

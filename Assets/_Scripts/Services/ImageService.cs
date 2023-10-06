@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
+using RSG;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 namespace _Scripts.Services
 {
@@ -32,23 +35,31 @@ namespace _Scripts.Services
                 return true;
             return false;
         }
-
-        public IEnumerator GetImageTexture(string uri, Action<Sprite> callback)
-        {
-            UnityWebRequest www = UnityWebRequestTexture.GetTexture(uri);
-            yield return www.SendWebRequest();
-
-            if (www.result != UnityWebRequest.Result.Success)
-            {
-                Debug.Log(www.error);
-            }
-            else
-            {
-                Texture2D myTexture = ((DownloadHandlerTexture)www.downloadHandler).texture;
-                Sprite sprite = Sprite.Create(myTexture, new Rect(0, 0, myTexture.width, myTexture.height),
-                    new Vector2(0.5f, 0.5f));
-                callback(sprite);
-            }
-        }
+        
+        public IPromise<Sprite> GetImageTexture(string uri)
+       {
+           var promise = new Promise<Sprite>();
+           using (var client = new WebClient())
+           {
+               client.DownloadDataCompleted += (sender, e) =>
+               {
+                   if (e.Error != null)
+                   {
+                       promise.Reject(e.Error);
+                   }
+                   else
+                   {
+                       Texture2D myTexture = new Texture2D(2,2);
+                       myTexture.LoadImage(e.Result);
+                       Sprite sprite = Sprite.Create(myTexture, new Rect(0, 0, myTexture.width, myTexture.height),
+                           new Vector2(0.5f, 0.5f));
+                       promise.Resolve(sprite);
+                   }
+               };
+               client.DownloadDataAsync(new Uri(uri), null);
+           }
+           return promise;
+       }
+       
     }
 }
